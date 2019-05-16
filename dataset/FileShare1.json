@@ -1,0 +1,14 @@
+{
+	"name": "FileShare1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "onpremfile",
+			"type": "LinkedServiceReference"
+		},
+		"type": "FileShare",
+		"typeProperties": {
+			"fileName": "titlebasics.tsv",
+			"folderPath": ""
+		}
+	}
+}
