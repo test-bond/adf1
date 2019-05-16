@@ -1,0 +1,14 @@
+{
+	"name": "DSTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"typeProperties": {
+			"tableName": "[dbo].[data_source_table]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

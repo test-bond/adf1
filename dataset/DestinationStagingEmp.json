@@ -1,0 +1,36 @@
+{
+	"name": "DestinationStagingEmp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "EmpID",
+				"type": "Int32"
+			},
+			{
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "MiddleName",
+				"type": "String"
+			},
+			{
+				"name": "LastName",
+				"type": "String"
+			},
+			{
+				"name": "OPERATION",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[etl].[StagingEmp]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

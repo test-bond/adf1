@@ -1,0 +1,16 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=MININT-VF93B3C;initial catalog=AdventureWorks2016",
+			"userName": "northamerica\\vishinde",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2MGZiOGQwMS00YWFiLTRlNzUtODM2Yi04Y2VlNzU2YTQ1NTQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfIR1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

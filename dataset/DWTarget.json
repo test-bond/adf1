@@ -1,0 +1,17 @@
+{
+	"name": "DWTarget",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWTarget",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlDWTable",
+		"typeProperties": {
+			"tableName": {
+				"value": "[@{item().TableSchema}].[@{item().TableName}]",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

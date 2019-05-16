@@ -1,0 +1,38 @@
+{
+	"name": "SSISIR",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "East US",
+				"nodeSize": "Standard_D4_v3",
+				"numberOfNodes": 1,
+				"maxParallelExecutionsPerNode": 1,
+				"vNetProperties": {
+					"vNetId": "/subscriptions/c261902e-754a-4493-9b4c-50c04f02fc4b/resourceGroups/sqlmi8/providers/Microsoft.Network/virtualNetworks/vnet-testmi7",
+					"subnet": "ssisirvnet"
+				}
+			},
+			"ssisProperties": {
+				"catalogInfo": {
+					"catalogServerEndpoint": "sqlsrv7.database.windows.net",
+					"catalogAdminUserName": "dataarch",
+					"catalogAdminPassword": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"catalogPricingTier": "S0"
+				},
+				"customSetupScriptProperties": {
+					"blobContainerUri": "https://polystore.blob.core.windows.net/mystore",
+					"sasToken": {
+						"type": "SecureString",
+						"value": "**********"
+					}
+				},
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded"
+			}
+		}
+	}
+}

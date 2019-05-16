@@ -1,0 +1,27 @@
+{
+	"name": "BlobPush",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": false
+			},
+			"fileName": {
+				"value": "@CONCAT('Incremental-', pipeline().RunId, '.txt')",
+				"type": "Expression"
+			},
+			"folderPath": "incremental"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,68 @@
+{
+	"name": "IfPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "ControlLookup",
+				"type": "Lookup",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderQuery": {
+							"value": "select tblname\nfrom dbo.lookuptbl \nwhere monthupdated = @{pipeline().parameters.month}",
+							"type": "Expression"
+						}
+					},
+					"dataset": {
+						"referenceName": "ControlLookupDS",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "ControlLookup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"typeProperties": {
+					"expression": {
+						"value": "@{equals(activity('ControlLookup').output.firstRow.tblname,'alltbls')}",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "RunLookupPipeline",
+							"type": "ExecutePipeline",
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "LookupTblsAndExecute",
+									"type": "PipelineReference"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"month": {
+				"type": "String",
+				"defaultValue": "1"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

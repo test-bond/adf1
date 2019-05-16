@@ -1,0 +1,231 @@
+{
+	"name": "CTWithSP",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.TableList",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "StoredProceduretoUpdateChangeTrackingActivity",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Stored Procedure1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_update_emp_CT]",
+								"storedProcedureParameters": {
+									"versionId": {
+										"value": {
+											"value": "@activity('LookupCurrentChangeTrackingVersion').output.firstRow.ChgTrkVer",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "SqlDatabase",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "LookupTableChangeTrackingVersion",
+							"type": "Lookup",
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"source": {
+									"type": "SqlSource",
+									"sqlReaderQuery": {
+										"value": "SELECT Change_Tracking_Version\nFROM etl.Change_Tracking_Version\nWHERE Table_Name = '@{item().TblName}'",
+										"type": "Expression"
+									}
+								},
+								"dataset": {
+									"referenceName": "ETLChangeTrackingVersionDS",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "LookupCurrentChangeTrackingVersion",
+							"type": "Lookup",
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"source": {
+									"type": "SqlSource",
+									"sqlReaderQuery": "SELECT CHANGE_TRACKING_CURRENT_VERSION() AS ChgTrkVer"
+								},
+								"dataset": {
+									"referenceName": "SourceSQL",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "InsertStaging",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "LookupTableChangeTrackingVersion",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								},
+								{
+									"activity": "LookupCurrentChangeTrackingVersion",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_insert_staging_emp_table]",
+								"storedProcedureParameters": {
+									"ParamBeginCTVersion": {
+										"value": {
+											"value": "@activity('LookupTableChangeTrackingVersion').output.firstRow.Change_Tracking_Version",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									},
+									"ParamEndVersion": {
+										"value": {
+											"value": "@activity('LookupCurrentChangeTrackingVersion').output.firstRow.ChgTrkVer",
+											"type": "Expression"
+										},
+										"type": "Int64"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "SqlDatabase",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "CopyStagingToTarget",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "InsertStaging",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"source": {
+									"type": "SqlSource"
+								},
+								"sink": {
+									"type": "SqlSink",
+									"writeBatchSize": 10000
+								},
+								"enableStaging": false,
+								"dataIntegrationUnits": 0,
+								"translator": {
+									"type": "TabularTranslator",
+									"columnMappings": {
+										"EmpID": "EmpID",
+										"FirstName": "FirstName",
+										"MiddleName": "MiddleName",
+										"LastName": "LastName",
+										"Operation": "OPERATION"
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SrcStagingEmp",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationStagingEmp",
+									"type": "DatasetReference"
+								}
+							]
+						},
+						{
+							"name": "Stored Procedure1",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "CopyStagingToTarget",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"typeProperties": {
+								"storedProcedureName": "[dbo].[sp_upsert_emp_table]"
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureSqlDatabase1",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"TableList": {
+				"type": "Array"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

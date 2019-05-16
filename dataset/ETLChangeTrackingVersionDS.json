@@ -1,0 +1,14 @@
+{
+	"name": "ETLChangeTrackingVersionDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"typeProperties": {
+			"tableName": "[etl].[Change_Tracking_Version]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

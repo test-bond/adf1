@@ -1,0 +1,38 @@
+{
+	"name": "7zipOnPremFileShareTest",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute SSIS Package",
+				"type": "ExecuteSSISPackage",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "Proj1/ISProject/Package.dtsx"
+					},
+					"environmentPath": null,
+					"connectVia": {
+						"referenceName": "SSISIR",
+						"type": "IntegrationRuntimeReference"
+					},
+					"executionCredential": {
+						"domain": "contoso",
+						"userName": "dataarch",
+						"password": {
+							"type": "SecureString",
+							"value": "**********"
+						}
+					},
+					"loggingLevel": "Basic"
+				}
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,38 @@
+{
+	"name": "ADF-Pivot",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "File_Product",
+						"type": "DatasetReference"
+					},
+					"name": "sourceProducts",
+					"script": "source(output(\n\t\tProductID as string,\n\t\tName as string,\n\t\tProductNumber as string,\n\t\tColor as string,\n\t\tStandardCost as decimal(10,0),\n\t\tListPrice as string,\n\t\tSize as string,\n\t\tWeight as string,\n\t\tProductCategoryID as string,\n\t\tProductModelID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sourceProducts"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SaveFile",
+						"type": "DatasetReference"
+					},
+					"name": "Sink",
+					"script": "Pivot1 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> Sink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Pivot1",
+					"script": "DerivedColumn1 pivot(groupBy(Size),\n\tpivotBy(Color),\n\tavg = avg(StandardCost),\n\tcolumnNaming: '$N_$V_calculated',\n\tlateral: true) ~> Pivot1"
+				},
+				{
+					"name": "DerivedColumn1",
+					"script": "sourceProducts derive(Size = iif(isNull(Size)||Size=='NULL','NA',Size),\n\t\tColor = iif(isNull(Color)||Color=='NULL','NA',Color)) ~> DerivedColumn1"
+				}
+			]
+		}
+	}
+}

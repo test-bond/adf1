@@ -1,0 +1,14 @@
+{
+	"name": "CTCTbl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"typeProperties": {
+			"tableName": "[dbo].[table_store_ChangeTracking_version]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

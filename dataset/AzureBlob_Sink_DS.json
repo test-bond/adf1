@@ -1,0 +1,39 @@
+{
+	"name": "AzureBlob_Sink_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FilesStored",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"azuresqltblname": {
+				"type": "String",
+				"defaultValue": "@{dataset().azuresqltblname}"
+			},
+			"mon": {
+				"type": "String",
+				"defaultValue": "@{dataset().mon}"
+			},
+			"dt": {
+				"type": "String",
+				"defaultValue": "@{dataset().dt}"
+			}
+		},
+		"type": "AzureBlob",
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects"
+			},
+			"fileName": {
+				"value": "@concat(dataset().azuresqltblname,dataset().dt)",
+				"type": "Expression"
+			},
+			"folderPath": {
+				"value": "@concat('myfolder/',dataset().mon)",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sql7",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "test1",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[dbo].[test1]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

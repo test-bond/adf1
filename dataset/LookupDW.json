@@ -1,0 +1,14 @@
+{
+	"name": "LookupDW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DWTarget",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlDWTable",
+		"typeProperties": {
+			"tableName": "[dbo].[dummy]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

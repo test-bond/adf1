@@ -1,0 +1,32 @@
+{
+	"name": "OnPremSqlServerTbl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerOnPrem",
+			"type": "LinkedServiceReference"
+		},
+		"type": "SqlServerTable",
+		"structure": [
+			{
+				"name": "DepartmentID",
+				"type": "Int16"
+			},
+			{
+				"name": "Name",
+				"type": "String"
+			},
+			{
+				"name": "GroupName",
+				"type": "String"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "DateTime"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[HumanResources].[Department]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

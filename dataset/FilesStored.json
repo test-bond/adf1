@@ -1,0 +1,27 @@
+{
+	"name": "FilesStored",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FilesStored",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": ",",
+				"rowDelimiter": "",
+				"nullValue": "\\N",
+				"treatEmptyAsNull": true,
+				"skipLineCount": 0,
+				"firstRowAsHeader": true
+			},
+			"fileName": {
+				"value": "@{item().filename}",
+				"type": "Expression"
+			},
+			"folderPath": "adftest"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
