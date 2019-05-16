@@ -1,0 +1,16 @@
+{
+	"name": "onpremfile",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\MSFT\\ADF\\DataFlow\\IMDB\\title.basics.tsv",
+			"userId": "northamerica\\vishinde",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmODUwZjcwMC05MDBiLTRkNjUtYThhNS1lOTQwZDY3ZjdlMDEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfIR1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
