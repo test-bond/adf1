@@ -45,12 +45,14 @@
 					"source": {
 						"type": "SqlDWSource",
 						"sqlReaderQuery": {
-							"value": "select *\nfrom Staging.Control_Track\nwhere LastRun_DTS = '{@activity('LookupfromControlTbl').output.firstRow.LastRUN_DTS}'",
+							"value": "select @activity('LookupfromControlTbl').output.firstRow.LastRun_DTS",
 							"type": "Expression"
 						}
 					},
 					"sink": {
-						"type": "BlobSink"
+						"type": "DocumentDbCollectionSink",
+						"nestingSeparator": ".",
+						"writeBehavior": "insert"
 					},
 					"enableStaging": false
 				},
@@ -62,7 +64,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "BlobPush",
+						"referenceName": "DocumentDbCollection1",
 						"type": "DatasetReference"
 					}
 				]
