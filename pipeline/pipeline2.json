@@ -15,7 +15,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlDWSource",
-						"sqlReaderQuery": "select convert(varchar(20), LastRUN_DTS, 120) as LastRUN_DTS\nfrom STAGING.CONTROL_TRACK\nwhere table_name = 'MBR_DIM'"
+						"sqlReaderQuery": "select table_name as TblName\nfrom STAGING.CONTROL_TRACK\nwhere table_name = 'MBR_DIM'"
 					},
 					"dataset": {
 						"referenceName": "AzureSqlDWStgControl",
@@ -45,14 +45,12 @@
 					"source": {
 						"type": "SqlDWSource",
 						"sqlReaderQuery": {
-							"value": "select *\nfrom Staging.Control_Track\nwhere LastRun_DTS = '@activity('LookupfromControlTbl').output.firstRow.LastRun_DTS'",
+							"value": "select * from @activity('LookupfromControlTbl').output.firstRow.TblName",
 							"type": "Expression"
 						}
 					},
 					"sink": {
-						"type": "DocumentDbCollectionSink",
-						"nestingSeparator": ".",
-						"writeBehavior": "insert"
+						"type": "BlobSink"
 					},
 					"enableStaging": false
 				},
@@ -64,7 +62,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DocumentDbCollection1",
+						"referenceName": "BlobPush",
 						"type": "DatasetReference"
 					}
 				]
