@@ -45,7 +45,7 @@
 					"source": {
 						"type": "SqlDWSource",
 						"sqlReaderQuery": {
-							"value": "select * from @{activity('LookupfromControlTbl').output.firstRow.TblName}",
+							"value": "select * from STAGING.CONTROL_TRACK\nwhere table_name = @{activity('LookupfromControlTbl').output.firstRow.TblName}",
 							"type": "Expression"
 						}
 					},
