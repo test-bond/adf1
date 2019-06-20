@@ -15,7 +15,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlDWSource",
-						"sqlReaderQuery": "select table_name as TblName\nfrom STAGING.CONTROL_TRACK\nwhere table_name = 'MBR_DIM'"
+						"sqlReaderQuery": "select convert(varchar(20), LastRUN_DTS, 120) as LastRUNDTS\nfrom STAGING.CONTROL_TRACK\nwhere table_name = 'MBR_DIM'"
 					},
 					"dataset": {
 						"referenceName": "AzureSqlDWStgControl",
@@ -45,7 +45,7 @@
 					"source": {
 						"type": "SqlDWSource",
 						"sqlReaderQuery": {
-							"value": "select * from STAGING.CONTROL_TRACK\nwhere table_name = '@{activity('LookupfromControlTbl').output.firstRow.TblName}'",
+							"value": "select * from STAGING.CONTROL_TRACK\nwhere LastRun_DTS = '@{activity('LookupfromControlTbl').output.firstRow.LastRUNDTS}'",
 							"type": "Expression"
 						}
 					},
