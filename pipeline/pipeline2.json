@@ -45,7 +45,7 @@
 					"source": {
 						"type": "SqlDWSource",
 						"sqlReaderQuery": {
-							"value": "select *\nfrom Staging.Control_Track\nwhere LastRun_DTS = '@activity('LookupfromControlTbl').output.firstRow.LastRUN_DTS'",
+							"value": "select *\nfrom Staging.Control_Track\nwhere LastRun_DTS = '{@activity('LookupfromControlTbl').output.firstRow.LastRUN_DTS}'",
 							"type": "Expression"
 						}
 					},
