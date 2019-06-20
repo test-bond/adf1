@@ -1,0 +1,25 @@
+{
+	"name": "DestControlTrack2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDW7",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "TABLE_NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "LASTRUN_DTS",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"tableName": "[staging].[CONTROL_TRACK2]"
+		}
+	}
+}
