@@ -37,7 +37,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlDWTable1",
+						"referenceName": "AzureSqlDWStgControl",
 						"type": "DatasetReference"
 					}
 				]

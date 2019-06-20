@@ -1,0 +1,60 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookupfromControlTbl",
+				"type": "Lookup",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderQuery": "select convert(varchar(20), LastRUN_DTS, 120) as LastRUN_DTS\nfrom STAGING.CONTROL_TRACK\nwhere table_name = 'MBR_DIM'"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlDWStgControl",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Copy Data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "LookupfromControlTbl",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderQuery": "select convert(varchar(20), LastRUN_DTS, 120) as LastRUN_DTS\nfrom STAGING.CONTROL_TRACK\nwhere table_name = 'MBR_DIM'"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureSqlDWStgControl",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		]
+	}
+}

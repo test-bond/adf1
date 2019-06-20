@@ -1,13 +1,13 @@
 {
-	"name": "AzureSqlDWTable1",
+	"name": "AzureSqlDWStgControl",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDW89",
+			"referenceName": "AzureSqlDW7",
 			"type": "LinkedServiceReference"
 		},
 		"type": "AzureSqlDWTable",
 		"typeProperties": {
-			"tableName": "[STG].[dimUSFIPSCodes]"
+			"tableName": "[staging].[CONTROL_TRACK]"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
