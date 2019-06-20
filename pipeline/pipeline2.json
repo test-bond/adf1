@@ -45,7 +45,7 @@
 					"source": {
 						"type": "SqlDWSource",
 						"sqlReaderQuery": {
-							"value": "select * from @activity('LookupfromControlTbl').output.firstRow.TblName",
+							"value": "select * from @{activity('LookupfromControlTbl').output.firstRow.TblName}",
 							"type": "Expression"
 						}
 					},
