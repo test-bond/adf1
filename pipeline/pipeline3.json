@@ -33,7 +33,13 @@
 							"useTypeDefault": true
 						}
 					},
-					"enableStaging": false
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "teststore",
+							"type": "LinkedServiceReference"
+						}
+					}
 				},
 				"inputs": [
 					{
