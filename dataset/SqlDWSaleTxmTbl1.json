@@ -173,7 +173,7 @@
 			}
 		],
 		"typeProperties": {
-			"tableName": "[staging].[DLY_SALE_TXN_FCT5]"
+			"tableName": "[staging].[DLY_SALE_TXN_FCT3]"
 		}
 	}
 }
