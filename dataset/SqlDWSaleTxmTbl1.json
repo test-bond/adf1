@@ -1,0 +1,179 @@
+{
+	"name": "SqlDWSaleTxmTbl1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDW7",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "DT_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MKT_HIER_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MBR_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PD_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "COST_TP_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DLY_SALE_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "SALE_AMT",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "SALE_QTY",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "SALE_PRC",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "COST_AMT",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 7
+			},
+			{
+				"name": "DCN_AMT",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "DCN_QTY",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "DCN_PRC",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "CPN_AMT",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "CPN_QTY",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "CPN_PRC",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "TXN_NUM",
+				"type": "varchar"
+			},
+			{
+				"name": "TCKT_NUM",
+				"type": "varchar"
+			},
+			{
+				"name": "CASHIER_NUM",
+				"type": "varchar"
+			},
+			{
+				"name": "GNL_MSR",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 5
+			},
+			{
+				"name": "TXN_TP_CODE",
+				"type": "varchar"
+			},
+			{
+				"name": "IMPORT_FILE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SRC_SYS_CD",
+				"type": "varchar"
+			},
+			{
+				"name": "NAT_KEY_IN_SRC_SYS",
+				"type": "varchar"
+			},
+			{
+				"name": "LOGICAL_DEL_IND",
+				"type": "char"
+			},
+			{
+				"name": "CREATION_CYCLE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UPDATE_CYCLE_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CREATION_DT_TM",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "UPDATE_DT_TM",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "EFF_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "MD5_VAL",
+				"type": "varchar"
+			},
+			{
+				"name": "END_DT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "BASKET_ID",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[staging].[DLY_SALE_TXN_FCT5]"
+		}
+	}
+}
