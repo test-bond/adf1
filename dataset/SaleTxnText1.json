@@ -10,7 +10,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "[staging].[DLY_SALE_TXN_FCT3].txt",
-				"container": "polybasetest"
+				"container": "dwoutput"
 			},
 			"columnDelimiter": ",",
 			"rowDelimiter": "\n",
