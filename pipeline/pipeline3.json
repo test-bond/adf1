@@ -18,7 +18,6 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSetting",
 							"recursive": false,
-							"wildcardFileName": "[staging]*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -38,7 +37,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "dwoutput",
+						"referenceName": "SaleTxnText1",
 						"type": "DatasetReference"
 					}
 				],
