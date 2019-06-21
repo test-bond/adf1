@@ -12,7 +12,8 @@
 				"container": "dwoutput"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "\\",
+			"rowDelimiter": "\n",
+			"escapeChar": "",
 			"firstRowAsHeader": true,
 			"nullValue": {
 				"value": "@concat('')",
