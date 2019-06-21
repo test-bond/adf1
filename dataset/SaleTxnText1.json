@@ -19,7 +19,7 @@
 				"value": "@concat('')",
 				"type": "Expression"
 			},
-			"quoteChar": "\""
+			"quoteChar": ""
 		},
 		"schema": [
 			{
