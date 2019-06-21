@@ -18,6 +18,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSetting",
 							"recursive": false,
+							"wildcardFileName": "[staging]*",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
