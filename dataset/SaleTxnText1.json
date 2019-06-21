@@ -15,10 +15,6 @@
 			"columnDelimiter": ",",
 			"rowDelimiter": "\n",
 			"escapeChar": "",
-			"nullValue": {
-				"value": "@concat('')",
-				"type": "Expression"
-			},
 			"quoteChar": ""
 		},
 		"schema": [
