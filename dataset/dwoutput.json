@@ -1,0 +1,22 @@
+{
+	"name": "dwoutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "teststore",
+			"type": "LinkedServiceReference"
+		},
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "dwoutput"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"nullValue": "\"\"",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

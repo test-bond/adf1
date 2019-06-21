@@ -1,0 +1,14 @@
+{
+	"name": "AzureSqlDWStgTbl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDW7",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "[staging].[DLY_SALE_TXN_FCT3]"
+		}
+	}
+}
