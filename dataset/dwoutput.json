@@ -15,6 +15,10 @@
 			"rowDelimiter": "\n",
 			"escapeChar": "",
 			"firstRowAsHeader": true,
+			"nullValue": {
+				"value": "@concat('')",
+				"type": "Expression"
+			},
 			"quoteChar": ""
 		},
 		"schema": []
