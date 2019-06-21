@@ -30,16 +30,10 @@
 						"polyBaseSettings": {
 							"rejectValue": 0,
 							"rejectType": "value",
-							"useTypeDefault": true
+							"useTypeDefault": false
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "teststore",
-							"type": "LinkedServiceReference"
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
