@@ -37,7 +37,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SaleTxnText1",
+						"referenceName": "dwoutput",
 						"type": "DatasetReference"
 					}
 				],
