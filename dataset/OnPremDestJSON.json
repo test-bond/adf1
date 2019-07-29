@@ -12,7 +12,7 @@
 				"type": "JsonFormat",
 				"filePattern": "setOfObjects"
 			},
-			"fileName": "*.json"
+			"fileName": ".json"
 		}
 	}
 }
