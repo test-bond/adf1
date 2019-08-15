@@ -5,6 +5,7 @@
 			"referenceName": "DWTarget",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "AzureSqlDWTable",
 		"typeProperties": {
 			"tableName": "[dbo].[lookuptbl]"

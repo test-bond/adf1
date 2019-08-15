@@ -2,6 +2,7 @@
 	"name": "onpremfile",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "FileServer",
 		"typeProperties": {
 			"host": "C:\\MSFT\\ADF\\DataFlow\\IMDB\\title.basics.tsv",

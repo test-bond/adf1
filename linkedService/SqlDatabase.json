@@ -2,6 +2,7 @@
 	"name": "SqlDatabase",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
 			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=testsrv78.database.windows.net;initial catalog=testdb;user id=sqladmin",

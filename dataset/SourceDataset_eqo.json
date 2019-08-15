@@ -1,15 +1,21 @@
 {
-	"name": "DWTarget",
+	"name": "SourceDataset_eqo",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DWTarget",
+			"referenceName": "OnPremSqlServer",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"cw_tableName": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
-		"type": "AzureSqlDWTable",
+		"type": "SqlServerTable",
+		"schema": [],
 		"typeProperties": {
 			"tableName": {
-				"value": "[@{item().TableSchema}].[@{item().TableName}]",
+				"value": "@dataset().cw_tableName",
 				"type": "Expression"
 			}
 		}

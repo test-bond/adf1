@@ -2,6 +2,7 @@
 	"name": "polystore",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
 			"connectionString": "DefaultEndpointsProtocol=https;AccountName=polystore;EndpointSuffix=core.windows.net;",

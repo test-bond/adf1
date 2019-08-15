@@ -5,6 +5,7 @@
 			"referenceName": "FilesStored",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "AzureBlob",
 		"typeProperties": {
 			"format": {

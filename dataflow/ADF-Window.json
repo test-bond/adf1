@@ -9,8 +9,7 @@
 						"referenceName": "File_Product",
 						"type": "DatasetReference"
 					},
-					"name": "sourceProduct",
-					"script": "source(output(\n\t\tProductID as string,\n\t\tName as string,\n\t\tProductNumber as string,\n\t\tColor as string,\n\t\tStandardCost as decimal(10,0),\n\t\tListPrice as decimal(10,0),\n\t\tSize as string,\n\t\tWeight as string,\n\t\tProductCategoryID as string,\n\t\tProductModelID as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> sourceProduct"
+					"name": "sourceProduct"
 				}
 			],
 			"sinks": [
@@ -19,16 +18,15 @@
 						"referenceName": "SaveFile",
 						"type": "DatasetReference"
 					},
-					"name": "sink",
-					"script": "Window1 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sink"
+					"name": "sink"
 				}
 			],
 			"transformations": [
 				{
-					"name": "Window1",
-					"script": "sourceProduct window(over(Color),\n\tdesc(StandardCost, false),\n\tdenseRankStandardCost = denseRank(StandardCost)) ~> Window1"
+					"name": "Window1"
 				}
-			]
+			],
+			"script": "\n\nsource(output(\n\t\tProductID as string,\n\t\tName as string,\n\t\tProductNumber as string,\n\t\tColor as string,\n\t\tStandardCost as decimal(10,0),\n\t\tListPrice as decimal(10,0),\n\t\tSize as string,\n\t\tWeight as string,\n\t\tProductCategoryID as string,\n\t\tProductModelID as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> sourceProduct\nsourceProduct window(over(Color),\n\tdesc(StandardCost, false),\n\tdenseRankStandardCost = denseRank(StandardCost)) ~> Window1\nWindow1 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sink"
 		}
 	}
 }

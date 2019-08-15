@@ -3,8 +3,9 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Notebook1",
-				"type": "DatabricksNotebook",
+				"name": "ADFlow",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -12,25 +13,16 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/adftutorial/mynotebook",
-					"baseParameters": {
-						"imput": {
-							"value": "@pipeline().parameters.name",
-							"type": "Expression"
-						}
+					"dataflow": {
+						"referenceName": "ADF-Join",
+						"type": "DataFlowReference"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "Databricks_LS",
-					"type": "LinkedServiceReference"
 				}
 			}
 		],
-		"parameters": {
-			"name": {
-				"type": "string"
-			}
-		}
-	}
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

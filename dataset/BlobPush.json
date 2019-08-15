@@ -2,9 +2,10 @@
 	"name": "BlobPush",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "teststore",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "AzureBlob",
 		"typeProperties": {
 			"format": {
@@ -20,7 +21,7 @@
 				"value": "@CONCAT('Incremental-', pipeline().RunId, '.txt')",
 				"type": "Expression"
 			},
-			"folderPath": "folder1"
+			"folderPath": "incremental"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

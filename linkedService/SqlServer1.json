@@ -2,6 +2,7 @@
 	"name": "SqlServer1",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
 			"connectionString": "integrated security=True;data source=MININT-VF93B3C;initial catalog=AdventureWorks2016",

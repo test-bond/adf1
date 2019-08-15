@@ -5,6 +5,7 @@
 			"referenceName": "AzureBlobStorage2",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "AzureBlob",
 		"typeProperties": {
 			"format": {

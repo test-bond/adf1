@@ -2,6 +2,7 @@
 	"name": "CosmosDb1",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "CosmosDb",
 		"typeProperties": {
 			"connectionString": "AccountEndpoint=https://perftest7.documents.azure.com:443/;Database=docdb;",

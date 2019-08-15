@@ -19,6 +19,7 @@
 				"defaultValue": "@{dataset().dt}"
 			}
 		},
+		"annotations": [],
 		"type": "AzureBlob",
 		"typeProperties": {
 			"format": {

@@ -5,6 +5,7 @@
 			"referenceName": "polystore",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {

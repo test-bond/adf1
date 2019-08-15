@@ -5,6 +5,7 @@
 			"referenceName": "sql7",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "AzureSqlTable",
 		"structure": [
 			{

@@ -9,16 +9,14 @@
 						"referenceName": "File_Ratings",
 						"type": "DatasetReference"
 					},
-					"name": "Ratings",
-					"script": "source(output(\n\t\tuserId as string,\n\t\tmovieId as integer,\n\t\trating as decimal(10,0),\n\t\ttimestamp as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> Ratings"
+					"name": "Ratings"
 				},
 				{
 					"dataset": {
 						"referenceName": "file_movies",
 						"type": "DatasetReference"
 					},
-					"name": "Movies",
-					"script": "source(output(\n\t\tadult as string,\n\t\tid as integer,\n\t\trelease_date as string,\n\t\trevenue as string,\n\t\truntime as string,\n\t\ttagline as string,\n\t\ttitle as string,\n\t\tvote_average as string,\n\t\tvote_count as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> Movies"
+					"name": "Movies"
 				}
 			],
 			"sinks": [
@@ -27,32 +25,27 @@
 						"referenceName": "SaveFile",
 						"type": "DatasetReference"
 					},
-					"name": "sink1",
-					"script": "Select1 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> sink1"
+					"name": "sink1"
 				}
 			],
 			"transformations": [
 				{
-					"name": "Join1",
-					"script": "Ratings, Movies join(movieId == id,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> Join1"
+					"name": "Join1"
 				},
 				{
-					"name": "Aggregate1",
-					"script": "Join1 aggregate(groupBy(titles = title),\n\trating = avg(rating),\n\t\tmovieId = max(movieId)) ~> Aggregate1"
+					"name": "Aggregate1"
 				},
 				{
-					"name": "Origdata",
-					"script": "Join1 select(mapColumn(\n\t\tuserId,\n\t\tmovieId,\n\t\trating,\n\t\ttimestamp,\n\t\tadult,\n\t\tid,\n\t\trelease_date,\n\t\trevenue,\n\t\truntime,\n\t\ttagline,\n\t\ttitle,\n\t\tvote_average,\n\t\tvote_count\n\t))~> Origdata"
+					"name": "Origdata"
 				},
 				{
-					"name": "Join2",
-					"script": "Aggregate1, Origdata join(Aggregate1@movieId == Origdata@movieId,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> Join2"
+					"name": "Join2"
 				},
 				{
-					"name": "Select1",
-					"script": "Join2 select(mapColumn(\n\t\ttitle = titles,\n\t\trating = Aggregate1@rating,\n\t\tmovieId = Aggregate1@movieId,\n\t\tuserId,\n\t\ttimestamp,\n\t\tadult,\n\t\tid,\n\t\trelease_date,\n\t\trevenue,\n\t\truntime,\n\t\ttagline,\n\t\tvote_average,\n\t\tvote_count\n\t))~> Select1"
+					"name": "Select1"
 				}
-			]
+			],
+			"script": "\n\nsource(output(\n\t\tuserId as string,\n\t\tmovieId as integer,\n\t\trating as decimal(10,0),\n\t\ttimestamp as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> Ratings\nsource(output(\n\t\tadult as string,\n\t\tid as integer,\n\t\trelease_date as string,\n\t\trevenue as string,\n\t\truntime as string,\n\t\ttagline as string,\n\t\ttitle as string,\n\t\tvote_average as string,\n\t\tvote_count as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> Movies\nRatings, Movies join(movieId == id,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> Join1\nJoin1 aggregate(groupBy(titles = title),\n\trating = avg(rating),\n\t\tmovieId = max(movieId)) ~> Aggregate1\nJoin1 select(mapColumn(\n\t\tuserId,\n\t\tmovieId,\n\t\trating,\n\t\ttimestamp,\n\t\tadult,\n\t\tid,\n\t\trelease_date,\n\t\trevenue,\n\t\truntime,\n\t\ttagline,\n\t\ttitle,\n\t\tvote_average,\n\t\tvote_count\n\t)) ~> Origdata\nAggregate1, Origdata join(Aggregate1@movieId == Origdata@movieId,\n\tjoinType:'inner',\n\tbroadcast: 'none')~> Join2\nJoin2 select(mapColumn(\n\t\ttitle = titles,\n\t\trating = Aggregate1@rating,\n\t\tmovieId = Aggregate1@movieId,\n\t\tuserId,\n\t\ttimestamp,\n\t\tadult,\n\t\tid,\n\t\trelease_date,\n\t\trevenue,\n\t\truntime,\n\t\ttagline,\n\t\tvote_average,\n\t\tvote_count\n\t)) ~> Select1\nSelect1 sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string\n\t),\n\tallowSchemaDrift: false,\n\tvalidateSchema: false) ~> sink1"
 		}
 	}
 }

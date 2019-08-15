@@ -1,41 +1,33 @@
 {
-	"name": "File_Ratings",
+	"name": "DestinationDataset_eqo",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "polystore",
 			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_fileName": {
+				"type": "String"
+			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "ratings_small.csv",
-				"container": "dataflow"
+				"fileName": {
+					"value": "@dataset().cw_fileName",
+					"type": "Expression"
+				},
+				"folderPath": "hackathon/VanArsdel",
+				"container": "dbricksstore"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"name": "userId",
-				"type": "String"
-			},
-			{
-				"name": "movieId",
-				"type": "String"
-			},
-			{
-				"name": "rating",
-				"type": "String"
-			},
-			{
-				"name": "timestamp",
-				"type": "String"
-			}
-		]
+		"schema": []
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

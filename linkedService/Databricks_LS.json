@@ -2,6 +2,7 @@
 	"name": "Databricks_LS",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
 			"domain": "https://eastus.azuredatabricks.net",

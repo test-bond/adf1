@@ -5,6 +5,7 @@
 			{
 				"name": "Web1",
 				"type": "WebActivity",
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -12,6 +13,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
 					"url": "https://reqres.in/api/users",
 					"method": "POST",
@@ -32,6 +34,7 @@
 						]
 					}
 				],
+				"userProperties": [],
 				"typeProperties": {
 					"expression": {
 						"value": "@equals(activity('Web1').output.name,'test1')",
@@ -41,6 +44,7 @@
 						{
 							"name": "Stored Procedure1",
 							"type": "SqlServerStoredProcedure",
+							"dependsOn": [],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -48,6 +52,7 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
+							"userProperties": [],
 							"typeProperties": {
 								"storedProcedureName": "[dbo].[Update_TestTbl]",
 								"storedProcedureParameters": {
@@ -68,7 +73,8 @@
 					]
 				}
 			}
-		]
+		],
+		"annotations": []
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

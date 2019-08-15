@@ -1,0 +1,17 @@
+{
+	"name": "OnPremSqlServer",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=.;initial catalog=OnPremRentals",
+			"userName": "northamerica\\vishinde",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiNGRiNmVmMi1hZDViLTQ5NGItODhjYy1hZDcxMjYyZmY0NTQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfIR1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

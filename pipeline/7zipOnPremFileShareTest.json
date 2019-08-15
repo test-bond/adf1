@@ -5,6 +5,7 @@
 			{
 				"name": "Execute SSIS Package",
 				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -12,9 +13,11 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
 					"packageLocation": {
-						"packagePath": "Proj1/ISProject/Package.dtsx"
+						"packagePath": "Proj1/ISProject/Package.dtsx",
+						"type": "SSISDB"
 					},
 					"environmentPath": null,
 					"connectVia": {
@@ -32,7 +35,8 @@
 					"loggingLevel": "Basic"
 				}
 			}
-		]
+		],
+		"annotations": []
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

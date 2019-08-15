@@ -2,6 +2,7 @@
 	"name": "AzureSqlDW7",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "AzureSqlDW",
 		"typeProperties": {
 			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=sqlsrv7.database.windows.net;initial catalog=advdw7;user id=dataarch",

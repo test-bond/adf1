@@ -1,17 +1,14 @@
 {
-	"name": "DWTarget",
+	"name": "AzureSqlDWTable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DWTarget",
+			"referenceName": "AzureSqlDW89",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "AzureSqlDWTable",
 		"typeProperties": {
-			"tableName": {
-				"value": "[@{item().TableSchema}].[@{item().TableName}]",
-				"type": "Expression"
-			}
+			"tableName": "[STG].[dimUSFIPSCodes]"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

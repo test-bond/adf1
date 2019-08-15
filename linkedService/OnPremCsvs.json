@@ -2,6 +2,7 @@
 	"name": "OnPremCsvs",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "FileServer",
 		"typeProperties": {
 			"host": "C:\\MSFT\\Azure\\OpenHack\\VanArsdel",

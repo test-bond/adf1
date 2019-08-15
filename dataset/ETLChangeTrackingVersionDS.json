@@ -5,6 +5,7 @@
 			"referenceName": "SqlDatabase",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "AzureSqlTable",
 		"typeProperties": {
 			"tableName": "[etl].[Change_Tracking_Version]"

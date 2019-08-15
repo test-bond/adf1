@@ -5,6 +5,7 @@
 			"referenceName": "SqlDatabase",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "AzureSqlTable"
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

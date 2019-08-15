@@ -2,6 +2,7 @@
 	"name": "DWTarget",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"annotations": [],
 		"type": "AzureSqlDW",
 		"typeProperties": {
 			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=testsrv8.database.windows.net;initial catalog=sqldw7;user id=sqladmin",

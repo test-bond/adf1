@@ -5,6 +5,7 @@
 			"referenceName": "SqlServerOnPrem",
 			"type": "LinkedServiceReference"
 		},
+		"annotations": [],
 		"type": "SqlServerTable",
 		"structure": [
 			{
