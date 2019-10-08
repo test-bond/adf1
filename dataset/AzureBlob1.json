@@ -17,7 +17,8 @@
 				"skipLineCount": 0,
 				"firstRowAsHeader": false
 			},
-			"folderPath": "/dwstore/dimUSFIPSCodes"
+			"fileName": "",
+			"folderPath": "xel"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

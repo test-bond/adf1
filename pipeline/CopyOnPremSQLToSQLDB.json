@@ -19,8 +19,7 @@
 						"type": "SqlSource"
 					},
 					"sink": {
-						"type": "SqlSink",
-						"writeBatchSize": 10000
+						"type": "BlobSink"
 					},
 					"enableStaging": false,
 					"translator": {
@@ -41,7 +40,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable2",
+						"referenceName": "AzureBlob1",
 						"type": "DatasetReference"
 					}
 				]
