@@ -21,16 +21,7 @@
 					"sink": {
 						"type": "BlobSink"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"columnMappings": {
-							"DepartmentID": "DepartmentID",
-							"Name": "Name",
-							"GroupName": "GroupName",
-							"ModifiedDate": "ModifiedDate"
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
