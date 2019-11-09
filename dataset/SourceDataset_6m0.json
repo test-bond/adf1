@@ -1,0 +1,93 @@
+{
+	"name": "SourceDataset_6m0",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDW7",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Region",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product Category",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Campaign ID",
+				"type": "float"
+			},
+			{
+				"name": "Campaign Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Qualification",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Qualification Number",
+				"type": "float"
+			},
+			{
+				"name": "Lead Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Leads",
+				"type": "float"
+			},
+			{
+				"name": "Cost",
+				"type": "float"
+			},
+			{
+				"name": "Marketing Cost",
+				"type": "float"
+			},
+			{
+				"name": "Revenue",
+				"type": "float"
+			},
+			{
+				"name": "Profit",
+				"type": "float"
+			},
+			{
+				"name": "ROI",
+				"type": "float"
+			},
+			{
+				"name": "Lead Generation (%)",
+				"type": "float"
+			},
+			{
+				"name": "Campaign Tactic",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer Segment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Revenue Target",
+				"type": "float"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AnalyzeCampaigns"
+		}
+	}
+}
