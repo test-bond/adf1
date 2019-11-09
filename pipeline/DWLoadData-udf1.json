@@ -1,0 +1,258 @@
+{
+	"name": "DWLoadData-udf1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_6m0",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.AnalyzeCampaigns"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.AnalyzeCampaigns"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"allowPolyBase": true,
+						"polyBaseSettings": {
+							"rejectValue": 0,
+							"rejectType": "value",
+							"useTypeDefault": true
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "polystore",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Region",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Region",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Country",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Product Category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Product Category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Campaign ID",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Campaign ID",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Campaign Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Campaign Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Qualification",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Qualification",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Qualification Number",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Qualification Number",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Lead Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Lead Status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Leads",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Leads",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Cost",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Cost",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Marketing Cost",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Marketing Cost",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Revenue",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Revenue",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Profit",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Profit",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "ROI",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "ROI",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Lead Generation (%)",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Lead Generation (%)",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Campaign Tactic",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Campaign Tactic",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Customer Segment",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Customer Segment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Revenue Target",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Revenue Target",
+									"type": "Double"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_6m0",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_6m0",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
