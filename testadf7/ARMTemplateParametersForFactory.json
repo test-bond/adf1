@@ -1,0 +1,189 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "testadf7"
+		},
+		"integrationRuntime_SSISIR": {
+			"value": "SSISIR"
+		},
+		"integrationRuntime_SelfIR1": {
+			"value": "SelfIR1"
+		},
+		"ADLSForHive_accountKey": {
+			"value": ""
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage2_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDW7_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDW89_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"CosmosDb1_connectionString": {
+			"value": ""
+		},
+		"DWTarget_connectionString": {
+			"value": ""
+		},
+		"Databricks_LS_accessToken": {
+			"value": ""
+		},
+		"FilesStored_connectionString": {
+			"value": ""
+		},
+		"HDIHiveLS_password": {
+			"value": ""
+		},
+		"OnPremCSVtoJSON_password": {
+			"value": ""
+		},
+		"OnPremCsvs_password": {
+			"value": ""
+		},
+		"OnPremEmpCSVs_password": {
+			"value": ""
+		},
+		"OnPremSqlServer_connectionString": {
+			"value": ""
+		},
+		"OnPremSqlServer_password": {
+			"value": ""
+		},
+		"SqlDatabase_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"SqlServerOnPrem_connectionString": {
+			"value": ""
+		},
+		"SqlServerOnPrem_password": {
+			"value": ""
+		},
+		"onpremfile_password": {
+			"value": ""
+		},
+		"polystore_connectionString": {
+			"value": ""
+		},
+		"sql7_connectionString": {
+			"value": ""
+		},
+		"teststore_connectionString": {
+			"value": ""
+		},
+		"cs2c2store_connectionString": {
+			"value": ""
+		},
+		"AzureBlob1_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"AzureBlob1_properties_typeProperties_folderPath": {
+			"value": "xel"
+		},
+		"AzureBlob2_properties_typeProperties_fileName": {
+			"value": "test1.csv"
+		},
+		"AzureBlob2_properties_typeProperties_folderPath": {
+			"value": "sqldbload/"
+		},
+		"AzureBlob_Sink_DS_properties_typeProperties_fileName": {
+			"value": "@concat(dataset().azuresqltblname,dataset().dt)"
+		},
+		"AzureBlob_Sink_DS_properties_typeProperties_folderPath": {
+			"value": "@concat('myfolder/',dataset().mon)"
+		},
+		"BlobPush_properties_typeProperties_fileName": {
+			"value": "@CONCAT('Incremental-', pipeline().RunId, '.txt')"
+		},
+		"BlobPush_properties_typeProperties_folderPath": {
+			"value": "incremental"
+		},
+		"FileShare1_properties_typeProperties_fileName": {
+			"value": "titlebasics.tsv"
+		},
+		"FileShare1_properties_typeProperties_folderPath": {
+			"value": ""
+		},
+		"FilesStored_properties_typeProperties_fileName": {
+			"value": "@{item().filename}"
+		},
+		"FilesStored_properties_typeProperties_folderPath": {
+			"value": "adftest"
+		},
+		"OnPremDestJSON_properties_typeProperties_fileName": {
+			"value": ".json"
+		},
+		"restsink_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"restsink_properties_typeProperties_folderPath": {
+			"value": "test"
+		},
+		"ADLSForHive_properties_typeProperties_url": {
+			"value": "https://testhdistore7.dfs.core.windows.net"
+		},
+		"HDIHiveLS_properties_typeProperties_userName": {
+			"value": "admin"
+		},
+		"OnPremCSVtoJSON_properties_typeProperties_host": {
+			"value": "c:\\csv"
+		},
+		"OnPremCSVtoJSON_properties_typeProperties_userId": {
+			"value": "northamerica\\vishinde"
+		},
+		"OnPremCsvs_properties_typeProperties_host": {
+			"value": "C:\\MSFT\\Azure\\OpenHack\\VanArsdel"
+		},
+		"OnPremCsvs_properties_typeProperties_userId": {
+			"value": "northamerica\\vishinde"
+		},
+		"OnPremEmpCSVs_properties_typeProperties_host": {
+			"value": "c:\\msft\\azure\\sqldb\\files"
+		},
+		"OnPremEmpCSVs_properties_typeProperties_userId": {
+			"value": "northamerica\\vishinde"
+		},
+		"OnPremSqlServer_properties_typeProperties_userName": {
+			"value": "northamerica\\vishinde"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "northamerica\\vishinde"
+		},
+		"SqlServerOnPrem_properties_typeProperties_userName": {
+			"value": "northamerica\\vishinde"
+		},
+		"onpremfile_properties_typeProperties_host": {
+			"value": "C:\\MSFT\\ADF\\DataFlow\\IMDB\\title.basics.tsv"
+		},
+		"onpremfile_properties_typeProperties_userId": {
+			"value": "northamerica\\vishinde"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "sqlsrv7.database.windows.net"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "dataarch"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"value": ""
+		}
+	}
+}

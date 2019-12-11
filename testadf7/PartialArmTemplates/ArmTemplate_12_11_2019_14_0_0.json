@@ -1,0 +1,723 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "testadf7"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyOnPremSQLToSQLDB')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlSource"
+							},
+							"sink": {
+								"type": "BlobSink"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "OnPremSqlServerTbl",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureBlob1",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureBlob1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DWLoadData-udf1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_6m0",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "dbo.AnalyzeCampaigns"
+							},
+							{
+								"name": "Destination",
+								"value": "dbo.AnalyzeCampaigns"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlDWSource"
+							},
+							"sink": {
+								"type": "SqlDWSink",
+								"allowPolyBase": true,
+								"polyBaseSettings": {
+									"rejectValue": 0,
+									"rejectType": "value",
+									"useTypeDefault": true
+								}
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "polystore",
+									"type": "LinkedServiceReference"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Region",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Region",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Country",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Country",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Product Category",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Product Category",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Campaign ID",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Campaign ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Campaign Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Campaign Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Qualification",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Qualification",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Status",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Qualification Number",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Qualification Number",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Lead Status",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Lead Status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Leads",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Leads",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Cost",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Cost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Marketing Cost",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Marketing Cost",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Revenue",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Revenue",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Profit",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Profit",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "ROI",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "ROI",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Lead Generation (%)",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Lead Generation (%)",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Campaign Tactic",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Campaign Tactic",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Customer Segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Customer Segment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Revenue Target",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Revenue Target",
+											"type": "Double"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_6m0",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_6m0",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_6m0')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_6m0')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlob1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureBlob",
+				"typeProperties": {
+					"format": {
+						"type": "TextFormat",
+						"columnDelimiter": "|",
+						"rowDelimiter": "",
+						"nullValue": "",
+						"treatEmptyAsNull": true,
+						"skipLineCount": 0,
+						"firstRowAsHeader": false
+					},
+					"fileName": "",
+					"folderPath": "xel"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_6m0')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DWTarget",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Region",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Country",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Product Category",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Campaign ID",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Campaign Name",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Qualification",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Status",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Qualification Number",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Lead Status",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Leads",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Cost",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Marketing Cost",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Revenue",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Profit",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "ROI",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Lead Generation (%)",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					},
+					{
+						"name": "Campaign Tactic",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Customer Segment",
+						"type": "nvarchar",
+						"precision": 255,
+						"scale": 255
+					},
+					{
+						"name": "Revenue Target",
+						"type": "float",
+						"precision": 15,
+						"scale": 255
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AnalyzeCampaigns"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_6m0')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDW7",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Region",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Country",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Product Category",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Campaign ID",
+						"type": "float"
+					},
+					{
+						"name": "Campaign Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Qualification",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Qualification Number",
+						"type": "float"
+					},
+					{
+						"name": "Lead Status",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Leads",
+						"type": "float"
+					},
+					{
+						"name": "Cost",
+						"type": "float"
+					},
+					{
+						"name": "Marketing Cost",
+						"type": "float"
+					},
+					{
+						"name": "Revenue",
+						"type": "float"
+					},
+					{
+						"name": "Profit",
+						"type": "float"
+					},
+					{
+						"name": "ROI",
+						"type": "float"
+					},
+					{
+						"name": "Lead Generation (%)",
+						"type": "float"
+					},
+					{
+						"name": "Campaign Tactic",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Customer Segment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Revenue Target",
+						"type": "float"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AnalyzeCampaigns"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLSForHive')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "https://testhdistore7.dfs.core.windows.net",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "**********"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HDIHiveLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HDInsight",
+				"typeProperties": {
+					"clusterUri": "https://hdihive7.azurehdinsight.net",
+					"userName": "admin",
+					"password": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"isEspEnabled": false,
+					"fileSystem": "cont1",
+					"linkedServiceName": {
+						"referenceName": "ADLSForHive",
+						"type": "LinkedServiceReference"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSForHive')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline4')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SrcBlob1",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "c2s2dest",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SrcBlob1')]",
+				"[concat(variables('factoryId'), '/datasets/c2s2dest')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SrcBlob1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "cs2c2store",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "0_cae34e57a3614ff1adc04cf92932477a_1.json",
+						"container": "sajob"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/c2s2dest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "cs2c2store",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destfolder"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

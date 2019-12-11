@@ -1,0 +1,542 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "testadf7"
+		},
+		"integrationRuntime_SSISIR": {
+			"type": "string",
+			"metadata": "Integration runtime name",
+			"defaultValue": "SSISIR"
+		},
+		"integrationRuntime_SelfIR1": {
+			"type": "string",
+			"metadata": "Integration runtime name",
+			"defaultValue": "SelfIR1"
+		},
+		"ADLSForHive_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ADLSForHive'"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
+		"AzureSqlDW7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDW7'"
+		},
+		"AzureSqlDW89_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDW89'"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"CosmosDb1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDb1'"
+		},
+		"DWTarget_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DWTarget'"
+		},
+		"Databricks_LS_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'Databricks_LS'"
+		},
+		"FilesStored_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'FilesStored'"
+		},
+		"HDIHiveLS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'HDIHiveLS'"
+		},
+		"OnPremCSVtoJSON_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremCSVtoJSON'"
+		},
+		"OnPremCsvs_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremCsvs'"
+		},
+		"OnPremEmpCSVs_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremEmpCSVs'"
+		},
+		"OnPremSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnPremSqlServer'"
+		},
+		"OnPremSqlServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremSqlServer'"
+		},
+		"SqlDatabase_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlDatabase'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"SqlServerOnPrem_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServerOnPrem'"
+		},
+		"SqlServerOnPrem_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServerOnPrem'"
+		},
+		"onpremfile_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'onpremfile'"
+		},
+		"polystore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'polystore'"
+		},
+		"sql7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'sql7'"
+		},
+		"teststore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'teststore'"
+		},
+		"cs2c2store_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'cs2c2store'"
+		},
+		"AzureBlob1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"AzureBlob1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "xel"
+		},
+		"AzureBlob2_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "test1.csv"
+		},
+		"AzureBlob2_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "sqldbload/"
+		},
+		"AzureBlob_Sink_DS_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@concat(dataset().azuresqltblname,dataset().dt)"
+		},
+		"AzureBlob_Sink_DS_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "@concat('myfolder/',dataset().mon)"
+		},
+		"BlobPush_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@CONCAT('Incremental-', pipeline().RunId, '.txt')"
+		},
+		"BlobPush_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "incremental"
+		},
+		"FileShare1_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "titlebasics.tsv"
+		},
+		"FileShare1_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"FilesStored_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": "@{item().filename}"
+		},
+		"FilesStored_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "adftest"
+		},
+		"OnPremDestJSON_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ".json"
+		},
+		"restsink_properties_typeProperties_fileName": {
+			"type": "string",
+			"defaultValue": ""
+		},
+		"restsink_properties_typeProperties_folderPath": {
+			"type": "string",
+			"defaultValue": "test"
+		},
+		"ADLSForHive_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://testhdistore7.dfs.core.windows.net"
+		},
+		"HDIHiveLS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin"
+		},
+		"OnPremCSVtoJSON_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "c:\\csv"
+		},
+		"OnPremCSVtoJSON_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"OnPremCsvs_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\MSFT\\Azure\\OpenHack\\VanArsdel"
+		},
+		"OnPremCsvs_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"OnPremEmpCSVs_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "c:\\msft\\azure\\sqldb\\files"
+		},
+		"OnPremEmpCSVs_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"OnPremSqlServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"SqlServerOnPrem_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"onpremfile_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\MSFT\\ADF\\DataFlow\\IMDB\\title.basics.tsv"
+		},
+		"onpremfile_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"type": "string",
+			"defaultValue": "sqlsrv7.database.windows.net"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"type": "string",
+			"defaultValue": "dataarch"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"type": "secureString"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"type": "secureString"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"integrationRuntime_SSISIR": {
+						"value": "[parameters('integrationRuntime_SSISIR')]"
+					},
+					"integrationRuntime_SelfIR1": {
+						"value": "[parameters('integrationRuntime_SelfIR1')]"
+					},
+					"ADLSForHive_accountKey": {
+						"value": "[parameters('ADLSForHive_accountKey')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"AzureBlobStorage2_connectionString": {
+						"value": "[parameters('AzureBlobStorage2_connectionString')]"
+					},
+					"AzureSqlDW7_connectionString": {
+						"value": "[parameters('AzureSqlDW7_connectionString')]"
+					},
+					"AzureSqlDW89_connectionString": {
+						"value": "[parameters('AzureSqlDW89_connectionString')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"CosmosDb1_connectionString": {
+						"value": "[parameters('CosmosDb1_connectionString')]"
+					},
+					"DWTarget_connectionString": {
+						"value": "[parameters('DWTarget_connectionString')]"
+					},
+					"Databricks_LS_accessToken": {
+						"value": "[parameters('Databricks_LS_accessToken')]"
+					},
+					"FilesStored_connectionString": {
+						"value": "[parameters('FilesStored_connectionString')]"
+					},
+					"SqlDatabase_connectionString": {
+						"value": "[parameters('SqlDatabase_connectionString')]"
+					},
+					"polystore_connectionString": {
+						"value": "[parameters('polystore_connectionString')]"
+					},
+					"sql7_connectionString": {
+						"value": "[parameters('sql7_connectionString')]"
+					},
+					"teststore_connectionString": {
+						"value": "[parameters('teststore_connectionString')]"
+					},
+					"cs2c2store_connectionString": {
+						"value": "[parameters('cs2c2store_connectionString')]"
+					},
+					"ADLSForHive_properties_typeProperties_url": {
+						"value": "[parameters('ADLSForHive_properties_typeProperties_url')]"
+					},
+					"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+						"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
+					},
+					"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+						"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
+					},
+					"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+						"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
+					},
+					"SSISIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+						"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlob1_properties_typeProperties_fileName": {
+						"value": "[parameters('AzureBlob1_properties_typeProperties_fileName')]"
+					},
+					"AzureBlob1_properties_typeProperties_folderPath": {
+						"value": "[parameters('AzureBlob1_properties_typeProperties_folderPath')]"
+					},
+					"AzureBlob2_properties_typeProperties_fileName": {
+						"value": "[parameters('AzureBlob2_properties_typeProperties_fileName')]"
+					},
+					"AzureBlob2_properties_typeProperties_folderPath": {
+						"value": "[parameters('AzureBlob2_properties_typeProperties_folderPath')]"
+					},
+					"AzureBlob_Sink_DS_properties_typeProperties_fileName": {
+						"value": "[parameters('AzureBlob_Sink_DS_properties_typeProperties_fileName')]"
+					},
+					"AzureBlob_Sink_DS_properties_typeProperties_folderPath": {
+						"value": "[parameters('AzureBlob_Sink_DS_properties_typeProperties_folderPath')]"
+					},
+					"BlobPush_properties_typeProperties_fileName": {
+						"value": "[parameters('BlobPush_properties_typeProperties_fileName')]"
+					},
+					"BlobPush_properties_typeProperties_folderPath": {
+						"value": "[parameters('BlobPush_properties_typeProperties_folderPath')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"HDIHiveLS_password": {
+						"value": "[parameters('HDIHiveLS_password')]"
+					},
+					"OnPremCSVtoJSON_password": {
+						"value": "[parameters('OnPremCSVtoJSON_password')]"
+					},
+					"OnPremCsvs_password": {
+						"value": "[parameters('OnPremCsvs_password')]"
+					},
+					"OnPremEmpCSVs_password": {
+						"value": "[parameters('OnPremEmpCSVs_password')]"
+					},
+					"OnPremSqlServer_connectionString": {
+						"value": "[parameters('OnPremSqlServer_connectionString')]"
+					},
+					"OnPremSqlServer_password": {
+						"value": "[parameters('OnPremSqlServer_password')]"
+					},
+					"FilesStored_properties_typeProperties_fileName": {
+						"value": "[parameters('FilesStored_properties_typeProperties_fileName')]"
+					},
+					"FilesStored_properties_typeProperties_folderPath": {
+						"value": "[parameters('FilesStored_properties_typeProperties_folderPath')]"
+					},
+					"restsink_properties_typeProperties_fileName": {
+						"value": "[parameters('restsink_properties_typeProperties_fileName')]"
+					},
+					"restsink_properties_typeProperties_folderPath": {
+						"value": "[parameters('restsink_properties_typeProperties_folderPath')]"
+					},
+					"HDIHiveLS_properties_typeProperties_userName": {
+						"value": "[parameters('HDIHiveLS_properties_typeProperties_userName')]"
+					},
+					"OnPremCSVtoJSON_properties_typeProperties_host": {
+						"value": "[parameters('OnPremCSVtoJSON_properties_typeProperties_host')]"
+					},
+					"OnPremCSVtoJSON_properties_typeProperties_userId": {
+						"value": "[parameters('OnPremCSVtoJSON_properties_typeProperties_userId')]"
+					},
+					"OnPremCsvs_properties_typeProperties_host": {
+						"value": "[parameters('OnPremCsvs_properties_typeProperties_host')]"
+					},
+					"OnPremCsvs_properties_typeProperties_userId": {
+						"value": "[parameters('OnPremCsvs_properties_typeProperties_userId')]"
+					},
+					"OnPremEmpCSVs_properties_typeProperties_host": {
+						"value": "[parameters('OnPremEmpCSVs_properties_typeProperties_host')]"
+					},
+					"OnPremEmpCSVs_properties_typeProperties_userId": {
+						"value": "[parameters('OnPremEmpCSVs_properties_typeProperties_userId')]"
+					},
+					"OnPremSqlServer_properties_typeProperties_userName": {
+						"value": "[parameters('OnPremSqlServer_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SqlServer1_connectionString": {
+						"value": "[parameters('SqlServer1_connectionString')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"SqlServerOnPrem_connectionString": {
+						"value": "[parameters('SqlServerOnPrem_connectionString')]"
+					},
+					"SqlServerOnPrem_password": {
+						"value": "[parameters('SqlServerOnPrem_password')]"
+					},
+					"onpremfile_password": {
+						"value": "[parameters('onpremfile_password')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"SqlServerOnPrem_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServerOnPrem_properties_typeProperties_userName')]"
+					},
+					"onpremfile_properties_typeProperties_host": {
+						"value": "[parameters('onpremfile_properties_typeProperties_host')]"
+					},
+					"onpremfile_properties_typeProperties_userId": {
+						"value": "[parameters('onpremfile_properties_typeProperties_userId')]"
+					},
+					"FileShare1_properties_typeProperties_fileName": {
+						"value": "[parameters('FileShare1_properties_typeProperties_fileName')]"
+					},
+					"FileShare1_properties_typeProperties_folderPath": {
+						"value": "[parameters('FileShare1_properties_typeProperties_folderPath')]"
+					},
+					"OnPremDestJSON_properties_typeProperties_fileName": {
+						"value": "[parameters('OnPremDestJSON_properties_typeProperties_fileName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_3')]"
+			]
+		}
+	]
+}
