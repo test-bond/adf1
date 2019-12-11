@@ -1,0 +1,17 @@
+{
+	"name": "c2s2dest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "cs2c2store",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "destfolder"
+			}
+		}
+	}
+}
