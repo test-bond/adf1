@@ -101,6 +101,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServerOnPrem'"
 		},
+		"cs2c2store_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'cs2c2store'"
+		},
 		"onpremfile_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'onpremfile'"
@@ -116,10 +120,6 @@
 		"teststore_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'teststore'"
-		},
-		"cs2c2store_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'cs2c2store'"
 		},
 		"AzureBlob1_properties_typeProperties_fileName": {
 			"type": "string",
@@ -313,6 +313,9 @@
 					"SqlDatabase_connectionString": {
 						"value": "[parameters('SqlDatabase_connectionString')]"
 					},
+					"cs2c2store_connectionString": {
+						"value": "[parameters('cs2c2store_connectionString')]"
+					},
 					"polystore_connectionString": {
 						"value": "[parameters('polystore_connectionString')]"
 					},
@@ -321,9 +324,6 @@
 					},
 					"teststore_connectionString": {
 						"value": "[parameters('teststore_connectionString')]"
-					},
-					"cs2c2store_connectionString": {
-						"value": "[parameters('cs2c2store_connectionString')]"
 					},
 					"ADLSForHive_properties_typeProperties_url": {
 						"value": "[parameters('ADLSForHive_properties_typeProperties_url')]"
@@ -411,15 +411,6 @@
 					"OnPremCsvs_password": {
 						"value": "[parameters('OnPremCsvs_password')]"
 					},
-					"OnPremEmpCSVs_password": {
-						"value": "[parameters('OnPremEmpCSVs_password')]"
-					},
-					"OnPremSqlServer_connectionString": {
-						"value": "[parameters('OnPremSqlServer_connectionString')]"
-					},
-					"OnPremSqlServer_password": {
-						"value": "[parameters('OnPremSqlServer_password')]"
-					},
 					"FilesStored_properties_typeProperties_fileName": {
 						"value": "[parameters('FilesStored_properties_typeProperties_fileName')]"
 					},
@@ -446,15 +437,6 @@
 					},
 					"OnPremCsvs_properties_typeProperties_userId": {
 						"value": "[parameters('OnPremCsvs_properties_typeProperties_userId')]"
-					},
-					"OnPremEmpCSVs_properties_typeProperties_host": {
-						"value": "[parameters('OnPremEmpCSVs_properties_typeProperties_host')]"
-					},
-					"OnPremEmpCSVs_properties_typeProperties_userId": {
-						"value": "[parameters('OnPremEmpCSVs_properties_typeProperties_userId')]"
-					},
-					"OnPremSqlServer_properties_typeProperties_userName": {
-						"value": "[parameters('OnPremSqlServer_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -476,6 +458,15 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"OnPremEmpCSVs_password": {
+						"value": "[parameters('OnPremEmpCSVs_password')]"
+					},
+					"OnPremSqlServer_connectionString": {
+						"value": "[parameters('OnPremSqlServer_connectionString')]"
+					},
+					"OnPremSqlServer_password": {
+						"value": "[parameters('OnPremSqlServer_password')]"
+					},
 					"SqlServer1_connectionString": {
 						"value": "[parameters('SqlServer1_connectionString')]"
 					},
@@ -490,6 +481,15 @@
 					},
 					"onpremfile_password": {
 						"value": "[parameters('onpremfile_password')]"
+					},
+					"OnPremEmpCSVs_properties_typeProperties_host": {
+						"value": "[parameters('OnPremEmpCSVs_properties_typeProperties_host')]"
+					},
+					"OnPremEmpCSVs_properties_typeProperties_userId": {
+						"value": "[parameters('OnPremEmpCSVs_properties_typeProperties_userId')]"
+					},
+					"OnPremSqlServer_properties_typeProperties_userName": {
+						"value": "[parameters('OnPremSqlServer_properties_typeProperties_userName')]"
 					},
 					"SqlServer1_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"

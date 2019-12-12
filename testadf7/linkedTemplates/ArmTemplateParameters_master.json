@@ -74,6 +74,9 @@
 		"SqlServerOnPrem_password": {
 			"value": ""
 		},
+		"cs2c2store_connectionString": {
+			"value": ""
+		},
 		"onpremfile_password": {
 			"value": ""
 		},
@@ -84,9 +87,6 @@
 			"value": ""
 		},
 		"teststore_connectionString": {
-			"value": ""
-		},
-		"cs2c2store_connectionString": {
 			"value": ""
 		},
 		"AzureBlob1_properties_typeProperties_fileName": {

@@ -7,6 +7,18 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "testadf7"
 		},
+		"OnPremEmpCSVs_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremEmpCSVs'"
+		},
+		"OnPremSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'OnPremSqlServer'"
+		},
+		"OnPremSqlServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'OnPremSqlServer'"
+		},
 		"SqlServer1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
@@ -26,6 +38,18 @@
 		"onpremfile_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'onpremfile'"
+		},
+		"OnPremEmpCSVs_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "c:\\msft\\azure\\sqldb\\files"
+		},
+		"OnPremEmpCSVs_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
+		},
+		"OnPremSqlServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "northamerica\\vishinde"
 		},
 		"SqlServer1_properties_typeProperties_userName": {
 			"type": "string",
@@ -60,6 +84,50 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/OnPremEmpCSVs')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "FileServer",
+				"typeProperties": {
+					"host": "[parameters('OnPremEmpCSVs_properties_typeProperties_host')]",
+					"userId": "[parameters('OnPremEmpCSVs_properties_typeProperties_userId')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('OnPremEmpCSVs_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "[parameters('integrationRuntime_SelfIR1')]",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OnPremSqlServer')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('OnPremSqlServer_connectionString')]",
+					"userName": "[parameters('OnPremSqlServer_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('OnPremSqlServer_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "[parameters('integrationRuntime_SelfIR1')]",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -122,47 +190,6 @@
 				"connectVia": {
 					"referenceName": "[parameters('integrationRuntime_SelfIR1')]",
 					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SrcBlob1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "cs2c2store",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "0_cae34e57a3614ff1adc04cf92932477a_1.json",
-						"container": "sajob"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/c2s2dest')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "cs2c2store",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "destfolder"
-					}
 				}
 			},
 			"dependsOn": []
@@ -1490,6 +1517,60 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline4')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SrcBlob1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "c2s2dest",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/sqldwpolybasetest')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1584,43 +1665,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OnPremSqlServerTbl')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SqlServerOnPrem",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"structure": [
-					{
-						"name": "DepartmentID",
-						"type": "Int16"
-					},
-					{
-						"name": "Name",
-						"type": "String"
-					},
-					{
-						"name": "GroupName",
-						"type": "String"
-					},
-					{
-						"name": "ModifiedDate",
-						"type": "DateTime"
-					}
-				],
-				"typeProperties": {
-					"tableName": "[[HumanResources].[Department]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SqlServerOnPrem')]"
-			]
 		}
 	]
 }

@@ -19,18 +19,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'OnPremCsvs'"
 		},
-		"OnPremEmpCSVs_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'OnPremEmpCSVs'"
-		},
-		"OnPremSqlServer_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'OnPremSqlServer'"
-		},
-		"OnPremSqlServer_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'OnPremSqlServer'"
-		},
 		"FilesStored_properties_typeProperties_fileName": {
 			"type": "string",
 			"defaultValue": "@{item().filename}"
@@ -64,18 +52,6 @@
 			"defaultValue": "C:\\MSFT\\Azure\\OpenHack\\VanArsdel"
 		},
 		"OnPremCsvs_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "northamerica\\vishinde"
-		},
-		"OnPremEmpCSVs_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "c:\\msft\\azure\\sqldb\\files"
-		},
-		"OnPremEmpCSVs_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "northamerica\\vishinde"
-		},
-		"OnPremSqlServer_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "northamerica\\vishinde"
 		}
@@ -749,6 +725,27 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SrcBlob1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "cs2c2store",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "0_cae34e57a3614ff1adc04cf92932477a_1.json",
+						"container": "sajob"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SrcStagingEmp')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -800,6 +797,26 @@
 				"type": "AzureSqlTable",
 				"typeProperties": {
 					"tableName": "[[dbo].[watermarktable]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/c2s2dest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "cs2c2store",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destfolder"
+					}
 				}
 			},
 			"dependsOn": []
@@ -983,50 +1000,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('OnPremCsvs_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "[parameters('integrationRuntime_SelfIR1')]",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OnPremEmpCSVs')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "FileServer",
-				"typeProperties": {
-					"host": "[parameters('OnPremEmpCSVs_properties_typeProperties_host')]",
-					"userId": "[parameters('OnPremEmpCSVs_properties_typeProperties_userId')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('OnPremEmpCSVs_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "[parameters('integrationRuntime_SelfIR1')]",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OnPremSqlServer')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('OnPremSqlServer_connectionString')]",
-					"userName": "[parameters('OnPremSqlServer_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('OnPremSqlServer_password')]"
 					}
 				},
 				"connectVia": {
